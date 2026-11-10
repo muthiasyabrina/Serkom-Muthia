@@ -74,12 +74,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $produk): RedirectResponse 
     {
-       $data = $request->validate(
-            [
-                'nama_produk' => ['required', 'string', 'max:100'], 
-                'deskripsi' => ['required', 'string'],
-                 'harga' => ['required', 'integer', 'min:0']
-                 ]);
+        $data = $request->only(['nama_produk', 'deskripsi', 'harga']);
 
         if ($request->hasFile('gambar')) {
             $imageName = time().'.'.$request->gambar->extension();
